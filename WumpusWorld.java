@@ -13,8 +13,8 @@ public class WumpusWorld {
 
     private void genMap(){ // generates pits, gold, wumpus, as well as breeze, stench, and glitter
 
-        int G = (int) (Math.random()*((map.length*map.length)-1)); // generate start spot for gold
-        int W = (int) (Math.random()*((map.length*map.length)-1)); // generate start spot for wumpus
+        int G = (int) (1+(Math.random()*((map.length*map.length)-1))); // generate start spot for gold
+        int W = (int) (1+(Math.random()*((map.length*map.length)-1))); // generate start spot for wumpus
 
         System.out.println("Gold at "+ G+ " Wumpus at "+W);
         int count =0;
@@ -101,16 +101,67 @@ public class WumpusWorld {
     public boolean shootArrow(int x, int y, int dir){ // dir: 0 up -y, 1 right +x, down 2, left 3
         boolean wumpusDead =false;
 
-        // check if wupus in direction of arrow shot, if so scream ...
-
+        // check if wumpus in direction of arrow shot, if so scream ...
+        if(dir == 0){                   // up
+            while(y>=0){
+                if(map[x][y][5]==true){
+                    wumpusDead= true;
+                    killWumpus(x,y);
+                }
+                y--;
+            }
+        }
+        if(dir == 1){                   // Right
+            while(x<=map.length){
+                if(map[x][y][5]==true){
+                    wumpusDead= true;
+                    killWumpus(x,y);
+                }
+                x++;
+            }
+        }
+        if(dir == 2){                   //Down
+            while(y<=map.length){
+                if(map[x][y][5]==true){
+                    wumpusDead= true;
+                    killWumpus(x,y);
+                }
+                y++;
+            }
+        }
+        if(dir == 3){
+            while(x>=0){       //Left
+                if(map[x][y][5]==true){
+                    wumpusDead= true;
+                    killWumpus(x,y);
+                }
+                y--;
+            }
+        }
 
 
         return wumpusDead;
     }
 
-    private void killWumpus(){
 
-        // erase wumpus and stench..
+
+    // erase wumpus and stench
+    private void killWumpus(int x, int y){
+        map[x][y][5]=false;
+
+        if(x+1<map.length){
+            map[x+1][y][6]=false;
+        }
+        if(x-1>=0){
+            map[x-1][y][6]=false;
+        }
+        if(y+1<map.length){
+            map[x][y+1][6]=false;
+        }
+        if(y-1>=0){
+            map[x][y-1][6]=false;
+        }
+
     }
 
 }
