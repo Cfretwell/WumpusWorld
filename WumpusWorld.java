@@ -67,7 +67,7 @@ public class WumpusWorld {
         }
     }
 
-    public void printMap(){ // prints out the maze or something
+    public void printMap(){ // prints out the maze in boolean layers
 
         for(int i=0; i<7;i++){
             System.out.println(i);
@@ -85,4 +85,32 @@ public class WumpusWorld {
         }
         System.out.println();
     }
+
+
+    // take in coordinates and send back list of things in the thing
+    public boolean[] locationCheck(int x, int y){
+        boolean [] location = new boolean[7];
+
+        for(int i=0;i<7;i++){
+            location[i]= map[x][y][i];
+        }
+        return location;
+    }
+
+    // shoot the arrow in a direction and see if kill wampus
+    public boolean shootArrow(int x, int y, int dir){ // dir: 0 up -y, 1 right +x, down 2, left 3
+        boolean wumpusDead =false;
+
+        // check if wupus in direction of arrow shot, if so scream ...
+
+
+
+        return wumpusDead;
+    }
+
+    private void killWumpus(){
+
+        // erase wumpus and stench..
+    }
+
 }
